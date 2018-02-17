@@ -460,19 +460,6 @@ public class ImsManager {
      * Format of EF IST is defined in 3GPP TS 31.103 (Section 4.2.7).
      */
     private static boolean isGbaValid(Context context) {
-        if (getBooleanCarrierConfig(context,
-                CarrierConfigManager.KEY_CARRIER_IMS_GBA_REQUIRED_BOOL)) {
-            final TelephonyManager telephonyManager = TelephonyManager.getDefault();
-            String efIst = telephonyManager.getIsimIst();
-            if (efIst == null) {
-                loge("ISF is NULL");
-                return true;
-            }
-            boolean result = efIst != null && efIst.length() > 1 &&
-                    (0x02 & (byte)efIst.charAt(1)) != 0;
-            if (DBG) log("GBA capable=" + result + ", ISF=" + efIst);
-            return result;
-        }
         return true;
     }
 
